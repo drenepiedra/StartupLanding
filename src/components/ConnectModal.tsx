@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
-import { X, Send, CheckCircle2, ShieldCheck, Mail, Building, User, MessageSquare } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  X,
+  Send,
+  CheckCircle2,
+  ShieldCheck,
+  Mail,
+  Building,
+  User,
+  MessageSquare,
+} from "lucide-react";
 
 interface ConnectModalProps {
   isOpen: boolean;
@@ -10,19 +19,19 @@ interface ConnectModalProps {
 export const ConnectModal: React.FC<ConnectModalProps> = ({
   isOpen,
   onClose,
-  defaultTopic = 'General Collaboration',
+  defaultTopic = "General Collaboration",
 }) => {
   if (!isOpen) return null;
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    organization: '',
+    name: "",
+    email: "",
+    organization: "",
     interest: defaultTopic,
-    message: '',
+    message: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [ticketId, setTicketId] = useState('');
+  const [ticketId, setTicketId] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +49,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fadeIn">
       <div
         className="bg-[#1b1b1d] border border-white/15 rounded-lg w-full max-w-lg overflow-hidden flex flex-col shadow-2xl relative cyber-glow"
-        onClick={(e) => e.stopPropagation()}
-      >
+        onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 bg-[#201f21]">
           <div className="flex items-center gap-3">
@@ -50,7 +58,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
             </div>
             <div>
               <h3 className="font-semibold text-lg text-[#e5e1e4]">
-                Connect with mycatproject
+                Connect with myproject
               </h3>
               <p className="text-xs font-mono-tech text-[#928f9e]">
                 ESTABLISH ENCRYPTED FELINE TELEMETRY LINK
@@ -61,8 +69,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
           <button
             id="close-connect-modal-btn"
             onClick={onClose}
-            className="text-[#928f9e] hover:text-white p-2 rounded hover:bg-white/5 transition-colors"
-          >
+            className="text-[#928f9e] hover:text-white p-2 rounded hover:bg-white/5 transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -78,8 +85,10 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
                 Connection Request Dispatched
               </h4>
               <p className="text-xs text-[#c8c4d5] leading-relaxed max-w-sm mx-auto">
-                Your dispatch has been queued in the Feline Mesh Gateway. Our engineering team
-                will respond to <strong className="text-[#c5c0ff]">{formData.email}</strong> within 24 hours.
+                Your dispatch has been queued in the Feline Mesh Gateway. Our
+                engineering team will respond to{" "}
+                <strong className="text-[#c5c0ff]">{formData.email}</strong>{" "}
+                within 24 hours.
               </p>
               <div className="bg-[#201f21] p-3 rounded border border-white/10 font-mono-tech text-xs text-[#c5c0ff] inline-block">
                 TICKET ID: {ticketId}
@@ -87,14 +96,15 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
               <div className="pt-4">
                 <button
                   onClick={handleReset}
-                  className="px-6 py-2.5 bg-[#c5c0ff] text-[#281590] rounded font-semibold text-xs font-mono-tech uppercase tracking-wider hover:brightness-110 transition-all"
-                >
+                  className="px-6 py-2.5 bg-[#c5c0ff] text-[#281590] rounded font-semibold text-xs font-mono-tech uppercase tracking-wider hover:brightness-110 transition-all">
                   Return to Platform
                 </button>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4">
               <div>
                 <label className="block text-xs font-mono-tech text-[#c8c4d5] mb-1">
                   FULL NAME / CALLSIGN *
@@ -105,7 +115,9 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
                     type="text"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     placeholder="e.g. Dr. Alex Mercer"
                     className="w-full bg-[#131315] border border-white/10 focus:border-[#c5c0ff] rounded pl-9 pr-3 py-2 text-xs text-[#e5e1e4] font-mono-tech outline-none transition-all placeholder:text-[#928f9e]/50"
                   />
@@ -122,7 +134,9 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
                     type="email"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     placeholder="alex@feline-lab.org"
                     className="w-full bg-[#131315] border border-white/10 focus:border-[#c5c0ff] rounded pl-9 pr-3 py-2 text-xs text-[#e5e1e4] font-mono-tech outline-none transition-all placeholder:text-[#928f9e]/50"
                   />
@@ -138,7 +152,9 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
                   <input
                     type="text"
                     value={formData.organization}
-                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, organization: e.target.value })
+                    }
                     placeholder="e.g. BioFeline Systems LLC"
                     className="w-full bg-[#131315] border border-white/10 focus:border-[#c5c0ff] rounded pl-9 pr-3 py-2 text-xs text-[#e5e1e4] font-mono-tech outline-none transition-all placeholder:text-[#928f9e]/50"
                   />
@@ -151,14 +167,25 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
                 </label>
                 <select
                   value={formData.interest}
-                  onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                  className="w-full bg-[#131315] border border-white/10 focus:border-[#c5c0ff] rounded px-3 py-2 text-xs text-[#e5e1e4] font-mono-tech outline-none transition-all"
-                >
-                  <option value="General Collaboration">General Technical Inquiry</option>
-                  <option value="Technical Consulting">Technical Consulting &amp; Architecture</option>
-                  <option value="IoT Development">Custom IoT Hardware / Firmware Design</option>
-                  <option value="AI for Felines">Feline ML Behavioral Datasets &amp; Models</option>
-                  <option value="Hardware Testing">Collar &amp; Feeder Pilot Program</option>
+                  onChange={(e) =>
+                    setFormData({ ...formData, interest: e.target.value })
+                  }
+                  className="w-full bg-[#131315] border border-white/10 focus:border-[#c5c0ff] rounded px-3 py-2 text-xs text-[#e5e1e4] font-mono-tech outline-none transition-all">
+                  <option value="General Collaboration">
+                    General Technical Inquiry
+                  </option>
+                  <option value="Technical Consulting">
+                    Technical Consulting &amp; Architecture
+                  </option>
+                  <option value="IoT Development">
+                    Custom IoT Hardware / Firmware Design
+                  </option>
+                  <option value="AI for Felines">
+                    Feline ML Behavioral Datasets &amp; Models
+                  </option>
+                  <option value="Hardware Testing">
+                    Collar &amp; Feeder Pilot Program
+                  </option>
                 </select>
               </div>
 
@@ -171,7 +198,9 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
                   <textarea
                     rows={3}
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     placeholder="Briefly describe your hardware requirements or integration goals..."
                     className="w-full bg-[#131315] border border-white/10 focus:border-[#c5c0ff] rounded pl-9 pr-3 py-2 text-xs text-[#e5e1e4] font-mono-tech outline-none transition-all placeholder:text-[#928f9e]/50"
                   />
@@ -181,8 +210,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#c5c0ff] text-[#281590] rounded font-semibold text-xs font-mono-tech uppercase tracking-wider hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(197,192,255,0.2)]"
-                >
+                  className="w-full py-3 bg-[#c5c0ff] text-[#281590] rounded font-semibold text-xs font-mono-tech uppercase tracking-wider hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(197,192,255,0.2)]">
                   <Send className="w-3.5 h-3.5" />
                   <span>Transmit Link Request</span>
                 </button>
