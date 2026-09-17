@@ -16,8 +16,13 @@ export const OriginalCatLogo: React.FC<OriginalCatLogoProps> = ({
       className={`relative inline-flex items-center justify-center ${className}`}
       style={{ width: size, height: size }}>
       <img
-        src="/src/public/isotipo.png"
+        src="/isotipo.png"
         alt=""
+        width={size}
+        height={size}
+        className={`w-full h-full object-contain ${
+          glow ? "filter drop-shadow-[0_0_16px_rgba(197,192,255,0.45)]" : ""
+        }`}
       />
     </div>
   );
