@@ -95,5 +95,10 @@ If a color is not carrying meaning, it is not present.
 - **Motion:** fade + translate-up entrances (8–16px, 300–600ms) via `motion`.
   Micro-interactions are opacity and transform based; nothing is animated
   outside the element that changed.
+- **Scroll reveal:** `Reveal` (`src/components/motion.tsx`) is the single
+  wrapper for entrance animations. Sections fade + rise 24px on first
+  viewport entry (once), staggered by grid index (`.1s` per column).
+  Header groups step `.05s` `.15s`. Safe-casts to static markup when the
+  user prefers reduced motion. Hero keeps its mount-time entrance.
 - **Background:** static Pure Paper White. A very subtle radial Mist Gray
   bloom may sit behind the hero; no canvas effects, no pixel fields.

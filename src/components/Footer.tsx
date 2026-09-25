@@ -1,5 +1,6 @@
 import React from "react";
 import { OriginalCatLogo } from "./OriginalCatLogo";
+import { Reveal } from "./motion";
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -9,6 +10,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal }) => {
   return (
     <footer className="bg-zinc-50 border-t border-zinc-200 w-full mt-16">
+      <Reveal y={12}>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 px-6 py-12 max-w-6xl mx-auto">
         {/* Brand */}
         <div className="flex items-center gap-3">
@@ -64,6 +66,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLegal }) => {
           </button>
         </div>
       </div>
+      </Reveal>
     </footer>
   );
 };

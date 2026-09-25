@@ -12,11 +12,12 @@ import {
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import { Reveal } from "./motion";
 
 export const ActiveDeployments: React.FC = () => {
   return (
     <section id="projects" className="py-16 sm:py-20 px-6 max-w-6xl mx-auto scroll-mt-24">
-      <div className="text-center mb-14">
+      <Reveal className="text-center mb-14">
         <div className="mb-4">
           <span className="text-xs font-medium uppercase tracking-widest text-brand">
             Plataformas en línea
@@ -28,13 +29,14 @@ export const ActiveDeployments: React.FC = () => {
         <p className="text-zinc-500 mt-3">
           Componentes certificados, soporte directo y despacho rápido.
         </p>
-      </div>
+      </Reveal>
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
         {/* Store Card */}
+        <Reveal delay={0.1} className="h-full">
         <Card
           id="store-deployment-card"
-          className="group transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          className="group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full">
           <CardContent className="p-6 sm:p-8 flex flex-col h-full">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
@@ -107,11 +109,13 @@ export const ActiveDeployments: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        </Reveal>
 
         {/* Academy Card */}
+        <Reveal delay={0.2} className="h-full">
         <Card
           id="academy-learn-card"
-          className="group transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+          className="group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full">
           <CardContent className="p-6 sm:p-8 flex flex-col h-full">
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
@@ -187,6 +191,7 @@ export const ActiveDeployments: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        </Reveal>
       </div>
     </section>
   );

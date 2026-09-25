@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
+import { Reveal } from "./motion";
 
 interface AudiovisualSectionProps {
   onContactClick: () => void;
@@ -66,7 +67,7 @@ export const AudiovisualSection: React.FC<AudiovisualSectionProps> = ({
 }) => {
   return (
     <section id="audiovisual" className="py-16 sm:py-20 px-6 max-w-6xl mx-auto border-t border-zinc-100 mt-12 scroll-mt-24">
-      <div className="text-center mb-14">
+      <Reveal className="text-center mb-14">
         <div className="mb-4">
           <span className="text-xs font-medium uppercase tracking-widest text-brand">
             Servicios audiovisuales
@@ -79,13 +80,13 @@ export const AudiovisualSection: React.FC<AudiovisualSectionProps> = ({
           Creamos contenido audiovisual profesional que comunica tu mensaje con
           impacto: desde la grabación hasta la entrega final lista para publicar.
         </p>
-      </div>
+      </Reveal>
 
       {/* Portfolio images */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto mb-14">
-        {PORTFOLIO.map((item) => (
+        {PORTFOLIO.map((item, idx) => (
+          <Reveal key={item.src} delay={idx * 0.12}>
           <figure
-            key={item.src}
             className="group relative overflow-hidden rounded-xl border border-zinc-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
             <img
               src={item.src}
@@ -101,6 +102,7 @@ export const AudiovisualSection: React.FC<AudiovisualSectionProps> = ({
               <p className="text-sm text-white/80 mt-0.5">{item.caption}</p>
             </figcaption>
           </figure>
+          </Reveal>
         ))}
       </div>
 
@@ -109,9 +111,9 @@ export const AudiovisualSection: React.FC<AudiovisualSectionProps> = ({
         {SERVICES.map((service, idx) => {
           const Icon = service.icon;
           return (
+            <Reveal key={idx} delay={(idx % 3) * 0.08}>
             <Card
-              key={idx}
-              className="transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+              className="transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 h-full">
               <CardContent className="p-5 flex items-start gap-4">
                 <div className="p-2.5 rounded-lg bg-muted text-zinc-900 shrink-0">
                   <Icon className="w-[18px] h-[18px]" />
@@ -126,11 +128,13 @@ export const AudiovisualSection: React.FC<AudiovisualSectionProps> = ({
                 </div>
               </CardContent>
             </Card>
+            </Reveal>
           );
         })}
 
         {/* CTA card */}
-        <Card className="border-brand/20 bg-brand/5 transition-all duration-300 hover:shadow-md">
+        <Reveal delay={0.16} className="h-full">
+        <Card className="border-brand/20 bg-brand/5 transition-all duration-300 hover:shadow-md h-full">
           <CardContent className="p-5 h-full flex flex-col justify-between gap-4">
             <div>
               <h3 className="text-sm font-semibold text-brand mb-1 flex items-center gap-2">
@@ -147,6 +151,7 @@ export const AudiovisualSection: React.FC<AudiovisualSectionProps> = ({
             </Button>
           </CardContent>
         </Card>
+        </Reveal>
       </div>
     </section>
   );

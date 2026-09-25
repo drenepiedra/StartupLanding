@@ -4,6 +4,7 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+import { Reveal } from './motion';
 
 export const CommunitySection: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -34,7 +35,7 @@ export const CommunitySection: React.FC = () => {
 
   return (
     <section id="community" className="py-16 sm:py-20 px-6 max-w-6xl mx-auto border-t border-zinc-100 mt-12 scroll-mt-24">
-      <div className="text-center mb-14">
+      <Reveal className="text-center mb-14">
         <div className="mb-4">
           <span className="text-xs font-medium uppercase tracking-widest text-brand">
             Contacto directo
@@ -46,11 +47,12 @@ export const CommunitySection: React.FC = () => {
         <p className="text-zinc-500 mt-3">
           Asesoría personalizada y respuesta rápida.
         </p>
-      </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Contact + form card */}
-        <Card className="lg:col-span-2">
+        <Reveal delay={0.1} className="h-full lg:col-span-2">
+        <Card className="h-full">
           <CardContent className="p-6 sm:p-8">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-11 h-11 rounded-lg bg-muted flex items-center justify-center text-zinc-900">
@@ -166,9 +168,11 @@ export const CommunitySection: React.FC = () => {
             </form>
           </CardContent>
         </Card>
+        </Reveal>
 
         {/* Links card */}
-        <Card className="flex flex-col">
+        <Reveal delay={0.2} className="h-full">
+        <Card className="flex flex-col h-full">
           <CardContent className="p-6 flex flex-col justify-between gap-6 h-full">
             <div>
               <div className="w-11 h-11 rounded-lg bg-muted flex items-center justify-center text-zinc-900 mb-4">
@@ -218,6 +222,7 @@ export const CommunitySection: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        </Reveal>
       </div>
     </section>
   );

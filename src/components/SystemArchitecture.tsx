@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Award, ChevronDown, ChevronUp, Cpu, HeartHandshake, Zap } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
+import { Reveal } from './motion';
 import { cn } from '@/lib/utils';
 
 export const SystemArchitecture: React.FC = () => {
@@ -35,32 +36,41 @@ export const SystemArchitecture: React.FC = () => {
 
   return (
     <section id="about" className="py-16 sm:py-20 px-6 max-w-6xl mx-auto relative scroll-mt-24">
-      <div className="bg-gradient-to-b from-zinc-50 to-white border border-zinc-200 rounded-xl p-8 sm:p-12">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-4">
-            <span className="text-xs font-medium uppercase tracking-widest text-brand">
-              Nuestra Identidad &amp; Filosofía
-            </span>
-          </div>
+      <Reveal>
+        <div className="bg-gradient-to-b from-zinc-50 to-white border border-zinc-200 rounded-xl p-8 sm:p-12">
+          <div className="max-w-3xl mx-auto">
+            <Reveal delay={0.05}>
+              <div className="mb-4">
+                <span className="text-xs font-medium uppercase tracking-widest text-brand">
+                  Nuestra Identidad &amp; Filosofía
+                </span>
+              </div>
+            </Reveal>
 
-          <h2 className="font-semibold text-3xl sm:text-4xl text-zinc-900 mb-6 tracking-tight">
-            ¿Quiénes somos?
-          </h2>
+            <Reveal delay={0.1}>
+              <h2 className="font-semibold text-3xl sm:text-4xl text-zinc-900 mb-6 tracking-tight">
+                ¿Quiénes somos?
+              </h2>
+            </Reveal>
 
-          <p className="text-zinc-600 text-base sm:text-lg mb-4 leading-relaxed">
-            Somos un equipo especializado de ingenieros, desarrolladores de
-            software y apasionados de la innovación tecnológica. Nuestro
-            objetivo principal es transformar ideas complejas en soluciones
-            prácticas, confiables y de vanguardia.
-          </p>
+            <Reveal delay={0.15}>
+              <p className="text-zinc-600 text-base sm:text-lg mb-4 leading-relaxed">
+                Somos un equipo especializado de ingenieros, desarrolladores de
+                software y apasionados de la innovación tecnológica. Nuestro
+                objetivo principal es transformar ideas complejas en soluciones
+                prácticas, confiables y de vanguardia.
+              </p>
+            </Reveal>
 
-          <p className="text-zinc-600 text-base sm:text-lg leading-relaxed">
-            Creemos firmemente en el código limpio, las relaciones duraderas
-            con nuestros clientes y colaboradores.
-          </p>
+            <Reveal delay={0.2}>
+              <p className="text-zinc-600 text-base sm:text-lg leading-relaxed">
+                Creemos firmemente en el código limpio, las relaciones duraderas
+                con nuestros clientes y colaboradores.
+              </p>
+            </Reveal>
 
-          {/* Leveraging: why choose us */}
-          <div className="mt-8 pt-6 border-t border-zinc-200">
+            {/* Leveraging: why choose us */}
+            <div className="mt-8 pt-6 border-t border-zinc-200">
             <button
               id="toggle-reasons-btn"
               onClick={() => setShowReasons(!showReasons)}
@@ -83,26 +93,27 @@ export const SystemArchitecture: React.FC = () => {
                 {valueProps.map((item, idx) => {
                   const Icon = item.icon;
                   return (
-                    <Card
-                      key={idx}
-                      className={cn(
-                        'transition-all duration-300 hover:shadow-md hover:-translate-y-0.5',
-                        idx % 2 === 1 && 'sm:translate-y-4'
-                      )}>
-                      <CardContent className="p-5 flex flex-col h-full">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="p-2.5 rounded-lg bg-muted text-zinc-900 shrink-0">
-                            <Icon className="w-[18px] h-[18px]" />
+                    <Reveal key={idx} delay={idx * 0.07} className="h-full">
+                      <Card
+                        className={cn(
+                          'transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 h-full',
+                          idx % 2 === 1 && 'sm:translate-y-4'
+                        )}>
+                        <CardContent className="p-5 flex flex-col h-full">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="p-2.5 rounded-lg bg-muted text-zinc-900 shrink-0">
+                              <Icon className="w-[18px] h-[18px]" />
+                            </div>
+                            <h3 className="text-sm font-semibold text-zinc-900">
+                              {item.title}
+                            </h3>
                           </div>
-                          <h3 className="text-sm font-semibold text-zinc-900">
-                            {item.title}
-                          </h3>
-                        </div>
-                        <p className="text-sm text-zinc-500 leading-relaxed">
-                          {item.description}
-                        </p>
-                      </CardContent>
-                    </Card>
+                          <p className="text-sm text-zinc-500 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </Reveal>
                   );
                 })}
               </div>
@@ -110,6 +121,7 @@ export const SystemArchitecture: React.FC = () => {
           </div>
         </div>
       </div>
+      </Reveal>
     </section>
   );
 };

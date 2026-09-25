@@ -3,6 +3,7 @@ import { Competency } from '../types';
 import { Terminal, Cpu, Brain, CheckCircle2, ChevronRight, Mail } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
+import { Reveal } from './motion';
 import { cn } from '@/lib/utils';
 
 interface CoreCompetenciesProps {
@@ -31,7 +32,7 @@ export const CoreCompetencies: React.FC<CoreCompetenciesProps> = ({
 
   return (
     <section id="services" className="py-16 sm:py-20 px-6 max-w-6xl mx-auto border-t border-zinc-100 mt-12 scroll-mt-24">
-      <div className="text-center mb-14">
+      <Reveal className="text-center mb-14">
         <div className="mb-4">
           <span className="text-xs font-medium uppercase tracking-widest text-brand">
             Especialidades
@@ -43,15 +44,15 @@ export const CoreCompetencies: React.FC<CoreCompetenciesProps> = ({
         <p className="text-zinc-500 mt-3">
           Desarrollo de software a medida y productos personalizados.
         </p>
-      </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {competencies.map((comp) => {
+        {competencies.map((comp, idx) => {
           const isExpanded = expandedId === comp.id;
 
           return (
+            <Reveal key={comp.id} delay={(idx % 3) * 0.1} className="h-full">
             <Card
-              key={comp.id}
               id={`competency-${comp.id}`}
               className={cn(
                 'flex flex-col items-center text-center p-6 transition-all duration-300 group h-full',
@@ -124,6 +125,7 @@ export const CoreCompetencies: React.FC<CoreCompetenciesProps> = ({
                 )}
               </CardContent>
             </Card>
+            </Reveal>
           );
         })}
       </div>
