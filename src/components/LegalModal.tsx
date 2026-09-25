@@ -1,5 +1,6 @@
 import React from "react";
 import { X, ShieldCheck } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface LegalModalProps {
   type: "terms" | "privacy" | null;
@@ -10,22 +11,28 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
   if (!type) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md animate-fadeIn">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-zinc-900/40 backdrop-blur-sm"
+      onClick={onClose}>
       <div
-        className="bg-[#1b1b1d] border border-white/15 rounded-lg w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col shadow-2xl relative cyber-glow"
-        onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 bg-[#201f21]">
+        className="bg-white border border-zinc-200 rounded-xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={type === "terms" ? "Términos de Servicio" : "Política de Privacidad"}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-100">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded bg-[#353437] text-[#c5c0ff] border border-white/5">
+            <div className="p-2 rounded-lg bg-muted text-zinc-900">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[#e5e1e4]">
+              <h3 className="font-semibold text-lg text-zinc-900">
                 {type === "terms"
                   ? "Términos de Servicio y Garantía de Hardware"
                   : "Política de Privacidad y Protección de Datos"}
               </h3>
-              <p className="text-xs font-mono-tech text-[#928f9e]">
+              <p className="text-xs text-zinc-400">
                 MYPROJECT • COMPONENTES &amp; INGENIERÍA TECNOLÓGICA
               </p>
             </div>
@@ -33,15 +40,17 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
 
           <button
             onClick={onClose}
-            className="text-[#928f9e] hover:text-white p-2 rounded hover:bg-white/5 transition-colors">
+            aria-label="Cerrar"
+            className="text-zinc-400 hover:text-zinc-900 p-2 rounded-lg hover:bg-zinc-100 transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto space-y-4 text-xs text-[#c8c4d5] leading-relaxed">
+        {/* Content */}
+        <div className="p-6 overflow-y-auto space-y-4 text-sm text-zinc-600 leading-relaxed">
           {type === "terms" ? (
             <>
-              <h4 className="text-sm font-semibold text-[#c5c0ff]">
+              <h4 className="text-[15px] font-semibold text-zinc-900">
                 1. Calidad de Componentes e Integración
               </h4>
               <p>
@@ -50,16 +59,16 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
                 con verificación de funcionamiento y especificaciones técnicas
                 oficiales para desarrollo de prototipos y producción.
               </p>
-              <h4 className="text-sm font-semibold text-[#c5c0ff]">
+              <h4 className="text-[15px] font-semibold text-zinc-900">
                 2. Seguridad y Estándares Técnicos
               </h4>
               <p>
-                Nuestros diseños y proyectos de hardware implementan
-                protecciones de sobretensión, bajo consumo energético y
-                aislamiento seguro para operar de manera confiable en entornos
-                domésticos e industriales.
+                Nuestros diseños y proyectos de hardware implementan protecciones
+                de sobretensión, bajo consumo energético y aislamiento seguro
+                para operar de manera confiable en entornos domésticos e
+                industriales.
               </p>
-              <h4 className="text-sm font-semibold text-[#c5c0ff]">
+              <h4 className="text-[15px] font-semibold text-zinc-900">
                 3. Propiedad Intelectual y Soporte
               </h4>
               <p>
@@ -70,7 +79,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
             </>
           ) : (
             <>
-              <h4 className="text-sm font-semibold text-[#c5c0ff]">
+              <h4 className="text-[15px] font-semibold text-zinc-900">
                 1. Tratamiento de Información Personal
               </h4>
               <p>
@@ -79,7 +88,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
                 tus consultas comerciales y prestar los servicios técnicos
                 solicitados.
               </p>
-              <h4 className="text-sm font-semibold text-[#c5c0ff]">
+              <h4 className="text-[15px] font-semibold text-zinc-900">
                 2. Privacidad y Seguridad
               </h4>
               <p>
@@ -87,7 +96,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
                 Toda comunicación se gestiona bajo estrictos criterios de
                 confidencialidad y buenas prácticas de seguridad informática.
               </p>
-              <h4 className="text-sm font-semibold text-[#c5c0ff]">
+              <h4 className="text-[15px] font-semibold text-zinc-900">
                 3. Contacto Directo
               </h4>
               <p>
@@ -99,12 +108,9 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
           )}
         </div>
 
-        <div className="px-6 py-4 border-t border-white/10 bg-[#201f21] flex justify-end">
-          <button
-            onClick={onClose}
-            className="px-5 py-2 rounded bg-[#c5c0ff] text-[#281590] font-semibold text-xs font-mono-tech hover:brightness-110 transition-all">
-            Entendido y Aceptar
-          </button>
+        {/* Footer */}
+        <div className="px-6 py-4 border-t border-zinc-100 flex justify-end">
+          <Button onClick={onClose}>Entendido y Aceptar</Button>
         </div>
       </div>
     </div>

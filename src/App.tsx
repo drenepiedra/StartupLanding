@@ -4,10 +4,10 @@ import { Hero } from './components/Hero';
 import { SystemArchitecture } from './components/SystemArchitecture';
 import { ActiveDeployments } from './components/ActiveDeployments';
 import { CoreCompetencies } from './components/CoreCompetencies';
+import { AudiovisualSection } from './components/AudiovisualSection';
 import { CommunitySection } from './components/CommunitySection';
 import { Footer } from './components/Footer';
 import { LegalModal } from './components/LegalModal';
-import { AmbientPixelField } from './components/AmbientPixelField';
 import { COMPETENCIES_DATA } from './data/deployments';
 
 export default function App() {
@@ -23,10 +23,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#131315] text-[#e5e1e4] min-h-screen flex flex-col dot-bg relative selection:bg-[#c5c0ff] selection:text-[#281590] overflow-x-hidden">
-      {/* Subtle Ambient Pixel Dispersal Across the Page */}
-      <AmbientPixelField />
-
+    <div className="bg-white text-zinc-900 min-h-screen flex flex-col overflow-x-hidden">
       {/* Top Navbar */}
       <Navbar
         onNavigate={handleNavigate}
@@ -44,7 +41,7 @@ export default function App() {
         {/* Sección: ¿Quiénes somos? */}
         <SystemArchitecture />
 
-        {/* Sección: Tienda Online & Actividad (1 sola tarjeta ajustada con enlace a component.aewhitedevs.com) */}
+        {/* Sección: Tienda Online & Actividad */}
         <ActiveDeployments />
 
         {/* Sección: Core Competencies / Servicios Especializados */}
@@ -53,17 +50,22 @@ export default function App() {
           onContactClick={() => handleNavigate('community')}
         />
 
-        {/* Sección: Contacto Directo con correo drenepiedra@gmail.com */}
+        {/* Sección: Servicios Audiovisuales & Edición de Video */}
+        <AudiovisualSection
+          onContactClick={() => handleNavigate('community')}
+        />
+
+        {/* Sección: Contacto Directo */}
         <CommunitySection />
       </main>
 
-      {/* Footer con fecha 2026 y Todos los derechos reservados */}
+      {/* Footer */}
       <Footer
         onNavigate={handleNavigate}
         onOpenLegal={(type) => setLegalModalType(type)}
       />
 
-      {/* Modales Legales en Español */}
+      {/* Modales Legales */}
       <LegalModal
         type={legalModalType}
         onClose={() => setLegalModalType(null)}

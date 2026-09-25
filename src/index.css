@@ -1,61 +1,91 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-brand: var(--brand);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #3f3f46;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --brand: #4f46e5;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #18181b;
+  --radius: 0.625rem;
+}
+
 @layer base {
-  :root {
-    --bg-main: #131315;
-    --primary: #c5c0ff;
-    --on-primary: #281590;
-    --surface-container-lowest: #0e0e10;
-    --surface-container-low: #1b1b1d;
-    --surface-container: #201f21;
-    --surface-container-high: #2a2a2c;
-    --surface-container-highest: #353437;
-    --on-surface: #e5e1e4;
-    --on-surface-variant: #c8c4d5;
-    --secondary: #b8c4ff;
-    --secondary-container: #334282;
+  * {
+    @apply border-border outline-ring/50;
   }
 
   body {
-    background-color: #131315;
-    color: #e5e1e4;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
   }
 
-  font-family-mono {
-    font-family: 'Courier Prime', 'JetBrains Mono', monospace;
+  ::selection {
+    background: color-mix(in srgb, var(--brand) 15%, transparent);
+    color: #18181b;
   }
 }
 
-.dot-bg {
-  background-image: radial-gradient(circle, #353437 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-}
-
-.cyber-glow {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-}
-
-.cyber-glow-primary {
-  box-shadow: 0 0 20px rgba(197, 192, 255, 0.25), inset 0 0 0 1px rgba(197, 192, 255, 0.4);
-}
-
-.font-mono-tech {
-  font-family: 'Courier Prime', 'JetBrains Mono', monospace;
-}
-
-/* Custom scrollbar for cyber aesthetic */
+/* Subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #131315;
+  background: #fafafa;
 }
 ::-webkit-scrollbar-thumb {
-  background: #353437;
-  border-radius: 3px;
+  background: #d4d4d8;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c5c0ff;
+  background: #a1a1aa;
+}
+
+/* Soft radial bloom behind the hero only */
+.hero-bloom {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 0%, #f4f4f5 0%, rgba(244, 244, 245, 0.4) 42%, rgba(255, 255, 255, 0) 75%);
 }

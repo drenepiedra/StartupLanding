@@ -39,7 +39,7 @@ export const DEPLOYMENTS_DATA: Deployment[] = [
 export const COMPETENCIES_DATA: Competency[] = [
   {
     id: 'iot-development',
-    title: 'Desarrollo de Hardware',
+    title: 'Desarrollo de software para tu empresa o negocio ',
     description:
       'Diseño completo de software personalizado para su negocio.',
     iconName: 'developer_board',
@@ -54,7 +54,7 @@ export const COMPETENCIES_DATA: Competency[] = [
   {
     id: 'ai-automation',
     title: 'Desarrollo de Software a Medida',
-    description:'Creamos soluciones digitales escalables, desde aplicaciones web y móviles hasta plataformas SaaS, adaptadas a las necesidades específicas de tu negocio.',
+    description: 'Creamos soluciones digitales escalables, desde aplicaciones web y móviles hasta plataformas SaaS, adaptadas a las necesidades específicas de tu negocio.',
     iconName: 'psychology',
     specs: 'React, Next.js, Node.js, Python, Bases de datos SQL/NoSQL, AWS/Vercel',
     deliverables: [
@@ -64,12 +64,12 @@ export const COMPETENCIES_DATA: Competency[] = [
       'Configuración de pipelines de despliegue continuo (CI/CD) y mantenimiento evolutivo',
     ],
   },
- 
+
   {
     id: 'tech-consulting',
     title: 'Consultoría Tecnológica & Estrategia Digital',
-    description:'Te acompañamos desde la conceptualización de tu idea hasta su lanzamiento al mercado, asegurando decisiones técnicas sólidas y un camino claro hacia la escalabilidad.',
-    iconName: 'terminal', 
+    description: 'Te acompañamos desde la conceptualización de tu idea hasta su lanzamiento al mercado, asegurando decisiones técnicas sólidas y un camino claro hacia la escalabilidad.',
+    iconName: 'terminal',
     specs: 'Arquitectura Cloud-Native, Metodologías Ágiles, Diseño UX/UI, Ciberseguridad básica',
     deliverables: [
       'Auditorías técnicas y definición de la hoja de ruta (roadmap) del producto',

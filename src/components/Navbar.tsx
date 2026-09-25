@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { OriginalCatLogo } from "./OriginalCatLogo";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -16,8 +18,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 16);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -36,23 +39,23 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={cn(
+        "fixed top-0 w-full z-50 transition-all duration-300",
         isScrolled
-          ? "bg-[#131315]/90 backdrop-blur-md border-b border-white/10 shadow-lg"
-          : "bg-[#131315]/80 backdrop-blur-md border-b border-white/10"
-      }`}>
-      <div className="flex justify-between items-center px-4 sm:px-6 py-3 sm:py-4 max-w-6xl mx-auto">
+          ? "bg-white/85 backdrop-blur-md border-b border-zinc-200 shadow-[0_1px_2px_rgba(24,24,27,0.04)]"
+          : "bg-white/60 backdrop-blur-sm border-b border-transparent"
+      )}>
+      <div className="flex justify-between items-center px-4 sm:px-6 py-3 max-w-6xl mx-auto">
         {/* Brand */}
         <button
           id="nav-brand-btn"
           onClick={() => handleLinkClick("hero")}
-          className="flex items-center gap-2 sm:gap-3 text-left group focus:outline-none min-w-0">
+          className="flex items-center gap-2.5 text-left group focus:outline-none min-w-0">
           <OriginalCatLogo
-            size={48}
-            glow={true}
-            className="transition-transform group-hover:scale-110 shrink-0"
+            size={36}
+            className="transition-transform group-hover:scale-105 shrink-0"
           />
-          <span className="font-bold text-[18px] sm:text-[24px] text-[#c5c0ff] tracking-tighter leading-none truncate">
+          <span className="font-semibold text-lg text-zinc-900 tracking-tight leading-none truncate">
             myProject
           </span>
         </button>
@@ -66,42 +69,43 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={link.id}
                 id={`nav-link-${link.id}`}
                 onClick={() => handleLinkClick(link.id)}
-                className={`text-[15px] transition-colors focus:outline-none ${
+                className={cn(
+                  "text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-md",
                   isActive
-                    ? "text-[#c5c0ff] font-medium"
-                    : "text-[#c8c4d5] hover:text-[#c5c0ff] opacity-90 hover:opacity-100"
-                }`}>
+                    ? "text-zinc-900 font-medium"
+                    : "text-zinc-500 hover:text-zinc-900"
+                )}>
                 {link.label}
               </button>
             );
           })}
 
-          {/* Direct Store Link */}
           <a
             href="https://component.aewhitedevs.com"
             target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-[#c5c0ff]/10 hover:bg-[#c5c0ff]/20 text-[#c5c0ff] border border-[#c5c0ff]/30 text-xs font-mono-tech transition-all">
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Tienda Online</span>
+            rel="noopener noreferrer">
+            <Button variant="default" size="sm" className="gap-1.5">
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>Tienda Online</span>
+            </Button>
           </a>
         </nav>
 
-        {/* Mobile menu trigger */}
-        <div className="md:hidden flex items-center gap-4">
+        {/* Mobile actions */}
+        <div className="md:hidden flex items-center gap-3">
           <a
             href="https://component.aewhitedevs.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#c5c0ff]/10 text-[#c5c0ff] border border-[#c5c0ff]/30 text-[11px] font-mono-tech">
-            <ShoppingBag className="w-3 h-3" />
+            className="flex items-center gap-1.5 rounded-full bg-zinc-900 text-white px-3.5 py-2 text-xs font-medium hover:bg-zinc-800 transition-colors">
+            <ShoppingBag className="w-3.5 h-3.5" />
             <span>Tienda</span>
           </a>
 
           <button
             id="mobile-menu-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-[#c8c4d5] hover:text-[#c5c0ff] p-2 focus:outline-none"
+            className="text-zinc-600 hover:text-zinc-900 p-2 rounded-md focus:outline-none"
             aria-label="Toggle Navigation Menu">
             {mobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -114,23 +118,28 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#1b1b1d] border-b border-white/10 px-6 py-4 space-y-3">
+        <div className="md:hidden bg-white border-b border-zinc-200 shadow-sm px-6 py-4 space-y-1">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleLinkClick(link.id)}
-              className="block w-full text-left py-2 text-base text-[#c8c4d5] hover:text-[#c5c0ff] font-medium">
+              className={cn(
+                "block w-full text-left py-2.5 text-base rounded-md transition-colors",
+                activeSection === link.id
+                  ? "text-zinc-900 font-medium"
+                  : "text-zinc-600 hover:text-zinc-900"
+              )}>
               {link.label}
             </button>
           ))}
-          <div className="pt-2 border-t border-white/10">
+          <div className="pt-3 mt-2 border-t border-zinc-100">
             <a
               href="https://component.aewhitedevs.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-mono-tech text-[#c5c0ff] py-1">
+              className="flex items-center gap-2 text-sm text-brand py-1 font-medium">
               <ShoppingBag className="w-4 h-4" />
-              Visitar Tienda Oficial (component.aewhitedevs.com)
+              Visitar Tienda Oficial
             </a>
           </div>
         </div>

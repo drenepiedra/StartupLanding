@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Competency } from '../types';
 import { Terminal, Cpu, Brain, CheckCircle2, ChevronRight, Mail } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
 interface CoreCompetenciesProps {
   competencies: Competency[];
@@ -16,24 +19,29 @@ export const CoreCompetencies: React.FC<CoreCompetenciesProps> = ({
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'terminal':
-        return <Terminal className="w-8 h-8 text-[#c5c0ff]" />;
+        return <Terminal className="w-6 h-6" />;
       case 'developer_board':
-        return <Cpu className="w-8 h-8 text-[#c5c0ff]" />;
+        return <Cpu className="w-6 h-6" />;
       case 'psychology':
-        return <Brain className="w-8 h-8 text-[#c5c0ff]" />;
+        return <Brain className="w-6 h-6" />;
       default:
-        return <Cpu className="w-8 h-8 text-[#c5c0ff]" />;
+        return <Cpu className="w-6 h-6" />;
     }
   };
 
   return (
-    <section id="services" className="py-16 px-6 max-w-6xl mx-auto border-t border-white/5 mt-16 scroll-mt-24">
-      <div className="text-center mb-16">
-        <h2 className="font-semibold text-2xl sm:text-3xl md:text-[32px] text-[#c5c0ff] tracking-tight">
+    <section id="services" className="py-16 sm:py-20 px-6 max-w-6xl mx-auto border-t border-zinc-100 mt-12 scroll-mt-24">
+      <div className="text-center mb-14">
+        <div className="mb-4">
+          <span className="text-xs font-medium uppercase tracking-widest text-brand">
+            Especialidades
+          </span>
+        </div>
+        <h2 className="font-semibold text-3xl sm:text-4xl text-zinc-900 tracking-tight">
           Nuestros Servicios &amp; Especialidades
         </h2>
-        <p className="text-sm font-mono-tech text-[#928f9e] mt-2">
-          DESARROLLO DE SOFTWARE A MEDIDA • PRODUCTOS PERSONALIZADOS  
+        <p className="text-zinc-500 mt-3">
+          Desarrollo de software a medida y productos personalizados.
         </p>
       </div>
 
@@ -42,67 +50,80 @@ export const CoreCompetencies: React.FC<CoreCompetenciesProps> = ({
           const isExpanded = expandedId === comp.id;
 
           return (
-            <div
+            <Card
               key={comp.id}
               id={`competency-${comp.id}`}
-              className="flex flex-col items-center text-center p-6 rounded-lg bg-[#1b1b1d]/60 border border-white/10 hover:border-[#c5c0ff]/40 transition-all duration-300 relative group"
-            >
-              {/* Circular Badge with Subtle Glow */}
-              <div className="w-16 h-16 rounded-full border border-[#c5c0ff]/30 flex items-center justify-center mb-6 bg-[#1b1b1d] shadow-[0_0_20px_rgba(197,192,255,0.15)] group-hover:scale-110 group-hover:border-[#c5c0ff]/60 group-hover:shadow-[0_0_25px_rgba(197,192,255,0.3)] transition-all duration-300">
-                {getIcon(comp.iconName)}
-              </div>
-
-              {/* Title */}
-              <h3 className="font-semibold text-xl text-[#e5e1e4] mb-3 group-hover:text-[#c5c0ff] transition-colors">
-                {comp.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-[#c8c4d5] leading-relaxed mb-6 font-normal">
-                {comp.description}
-              </p>
-
-              {/* Expand details toggle */}
-              <button
-                onClick={() => setExpandedId(isExpanded ? null : comp.id)}
-                className="mt-auto inline-flex items-center gap-1.5 text-xs font-mono-tech text-[#c5c0ff] hover:text-white transition-colors"
-              >
-                <span>{isExpanded ? 'Ocultar detalles' : 'Ver capacidades y tecnologías'}</span>
-                <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
-              </button>
-
-              {/* Expanded details card */}
-              {isExpanded && (
-                <div className="w-full mt-5 pt-4 border-t border-white/10 text-left animate-fadeIn">
-                  <div className="text-[11px] font-mono-tech text-[#928f9e] uppercase mb-2">
-                    Stack Tecnológico Principal:
-                  </div>
-                  <div className="text-xs text-[#b8c4ff] font-mono-tech mb-3 bg-[#131315] p-2 rounded border border-white/5">
-                    {comp.specs}
-                  </div>
-
-                  <div className="text-[11px] font-mono-tech text-[#928f9e] uppercase mb-2">
-                    Entregables y Soluciones:
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-[#c8c4d5] mb-4">
-                    {comp.deliverables.map((d, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#c5c0ff] shrink-0 mt-0.5" />
-                        <span>{d}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    onClick={onContactClick}
-                    className="w-full py-2.5 px-3 bg-[#c5c0ff]/10 hover:bg-[#c5c0ff]/20 text-[#c5c0ff] border border-[#c5c0ff]/30 rounded text-xs font-mono-tech uppercase tracking-wider transition-all text-center flex items-center justify-center gap-1.5"
-                  >
-                    <Mail className="w-3.5 h-3.5" />
-                    <span>Consultar por este servicio</span>
-                  </button>
+              className={cn(
+                'flex flex-col items-center text-center p-6 transition-all duration-300 group h-full',
+                isExpanded && 'shadow-md'
+              )}>
+              <CardContent className="p-0 flex flex-col items-center h-full w-full">
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center text-zinc-900 mb-6 group-hover:bg-zinc-200 transition-colors">
+                  {getIcon(comp.iconName)}
                 </div>
-              )}
-            </div>
+
+                {/* Title */}
+                <h3 className="font-semibold text-xl text-zinc-900 mb-3">
+                  {comp.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-zinc-500 leading-relaxed mb-6">
+                  {comp.description}
+                </p>
+
+                {/* Expand toggle */}
+                <button
+                  onClick={() => setExpandedId(isExpanded ? null : comp.id)}
+                  aria-expanded={isExpanded}
+                  className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-zinc-900 hover:text-brand transition-colors">
+                  <span>
+                    {isExpanded
+                      ? 'Ocultar detalles'
+                      : 'Ver capacidades y tecnologías'}
+                  </span>
+                  <ChevronRight
+                    className={cn(
+                      'w-4 h-4 text-zinc-400 transition-transform',
+                      isExpanded && 'rotate-90'
+                    )}
+                  />
+                </button>
+
+                {/* Expanded details */}
+                {isExpanded && (
+                  <div className="w-full mt-5 pt-4 border-t border-zinc-100 text-left">
+                    <div className="text-[11px] font-medium uppercase tracking-wider text-zinc-400 mb-2">
+                      Stack Tecnológico Principal
+                    </div>
+                    <div className="text-xs text-zinc-700 font-mono mb-4 bg-zinc-50 p-2.5 rounded-lg border border-zinc-100">
+                      {comp.specs}
+                    </div>
+
+                    <div className="text-[11px] font-medium uppercase tracking-wider text-zinc-400 mb-2">
+                      Entregables y Soluciones
+                    </div>
+                    <ul className="space-y-1.5 text-sm text-zinc-600 mb-5">
+                      {comp.deliverables.map((d, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Button
+                      onClick={onContactClick}
+                      variant="outline"
+                      className="w-full">
+                      <Mail className="w-4 h-4" />
+                      <span>Consultar por este servicio</span>
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           );
         })}
       </div>

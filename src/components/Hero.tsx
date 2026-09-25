@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowDown, Cpu, Sparkles, ShoppingBag } from "lucide-react";
-import { PixelCanvasBackground } from "./PixelCanvasBackground";
+import { ArrowDown, ShoppingBag } from "lucide-react";
 import { OriginalCatLogo } from "./OriginalCatLogo";
+import { Button } from "./ui/button";
 
 interface HeroProps {
   onExploreProjects: () => void;
@@ -16,99 +16,91 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section
       id="hero"
-      className="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-6 pt-32 pb-20">
-      {/* Real Dynamic Pixel Grid Background (Single Unified Layer with Smooth Fade) */}
-      <PixelCanvasBackground />
-
-      {/* Hero Core Content */}
+      className="relative hero-bloom min-h-[88vh] flex items-center justify-center overflow-hidden px-6 pt-32 pb-20">
       <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8">
-        {/* Cat Logo Crest (Purple/Lilac Original Shape) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+        {/* Logo */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="relative group cursor-pointer p-3 rounded-2xl bg-[#1b1b1d]/80 border border-[#c5c0ff]/20 hover:border-[#c5c0ff]/50 transition-all duration-300 shadow-[0_0_25px_rgba(197,192,255,0.15)] hover:shadow-[0_0_35px_rgba(197,192,255,0.3)] hover:-translate-y-1"
-          onClick={onAboutClick}>
-          <div className="absolute -inset-4 bg-[#c5c0ff]/15 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          transition={{ duration: 0.5 }}
+          onClick={onAboutClick}
+          aria-label="Conocer más sobre myProject"
+          className="relative group cursor-pointer transition-transform hover:scale-105">
           <OriginalCatLogo
-            size={84}
-            glow={true}
-            className="relative z-10"
+            size={88}
+            className="transition-transform"
           />
-        </motion.div>
+        </motion.button>
 
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="space-y-4">
-          <h1 className="font-bold text-4xl sm:text-5xl md:text-[52px] text-[#c5c0ff] max-w-3xl leading-[1.1] tracking-[-0.02em] mx-auto">
+          transition={{ duration: 0.5, delay: 0.12 }}
+          className="space-y-5">
+          <h1 className="font-semibold text-5xl sm:text-6xl md:text-[64px] text-zinc-900 max-w-3xl leading-[1.05] tracking-tight mx-auto">
             MyProject
           </h1>
-
-          <p className="text-[#c8c4d5] text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-zinc-500 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
             Startup dedicada a facilitarte la vida
           </p>
         </motion.div>
 
         {/* Action Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md pt-2">
-          <button
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full max-w-md pt-2">
+          <Button
             id="hero-explore-projects-btn"
             onClick={onExploreProjects}
-            className="w-full sm:w-auto min-w-[200px] bg-[#c5c0ff] text-[#281590] font-semibold text-xs tracking-wider uppercase px-8 py-3.5 rounded cyber-glow hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(197,192,255,0.2)] text-center flex items-center justify-center gap-2">
+            size="lg"
+            className="w-full sm:w-auto min-w-[200px]">
             <span>Ver Proyectos &amp; Tienda</span>
-            <ArrowDown className="w-3.5 h-3.5" />
-          </button>
+            <ArrowDown className="w-4 h-4" />
+          </Button>
 
           <a
             id="hero-store-btn"
             href="https://component.aewhitedevs.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto min-w-[200px] bg-transparent text-[#c5c0ff] border border-[#c5c0ff] font-semibold text-xs tracking-wider uppercase px-8 py-3.5 rounded hover:bg-[#c5c0ff]/10 active:scale-[0.98] transition-all text-center flex items-center justify-center gap-2">
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Ir a la Tienda</span>
+            className="w-full sm:w-auto min-w-[200px]">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto min-w-[200px]">
+              <ShoppingBag className="w-4 h-4" />
+              <span>Ir a la Tienda</span>
+            </Button>
           </a>
         </motion.div>
 
-        {/* High-Tech System Live Metrics Bar */}
+        {/* Trust / Status Row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="pt-6 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs font-mono-tech text-[#928f9e]">
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="pt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-zinc-500">
           <div className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
             <span>
-              ESTADO DEL SISTEMA:{" "}
-              <strong className="text-[#e5e1e4]">EN LÍNEA</strong>
+              Sistema en línea
             </span>
           </div>
-          <div className="hidden sm:inline-block text-white/10">•</div>
+          <span className="hidden sm:inline text-zinc-200">•</span>
           <div className="flex items-center gap-2">
-            <Cpu className="w-3.5 h-3.5 text-[#c5c0ff]" />
-            <span>
-              TIENDA:{" "}
-              <strong className="text-[#e5e1e4]">
-                COMPONENT.aewhitedevs.COM
-              </strong>
-            </span>
+            <span className="font-medium text-zinc-700">Tienda:</span>
+            <span className="font-mono text-xs">component.aewhitedevs.com</span>
           </div>
-          <div className="hidden sm:inline-block text-white/10">•</div>
+          <span className="hidden sm:inline text-zinc-200">•</span>
           <div className="flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#b8c4ff]" />
-            <span>
-              SOPORTE:{" "}
-              <strong className="text-[#e5e1e4]">
-                ACTIVO &amp; DISPONIBLE
-              </strong>
-            </span>
+            <span className="font-medium text-zinc-700">Soporte:</span>
+            <span>Activo &amp; disponible</span>
           </div>
         </motion.div>
       </div>
